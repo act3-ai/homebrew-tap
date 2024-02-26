@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#:  * `run-act3-login` [<options>]
+#:
+#:  Runs ACT3 Login to authenticate to ACT3 services.
+#:  Acts as a shortcut to run the ACT3 Login command:
+#:    bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"
+#:
+#:      -h, --help                       Show this message.
+
+for option in "$@"; do
+	case "${option}" in
+	*)
+		brew help run-act3-login
+		exit $?
+		;;
+	esac
+done
+
+############################################################
+# Run the dang script
+############################################################
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"

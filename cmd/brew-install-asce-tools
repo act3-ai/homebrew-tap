@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+#:  * `install-asce-tools` [<options>]
+#:
+#:  Installs common tools for work in ASCE.
+#:
+#:      -v, --vscode                     Install VS Code extensions.
+#:      -h, --help                       Show this message.
+
+for option in "$@"; do
+	case "${option}" in
+	-v | --vscode) VSCODE="true" ;;
+	*)
+		brew help install-asce-tools
+		exit $?
+		;;
+	esac
+done
+
+set -e
+
+# Initialize cache directory
+CACHE="$(brew --cache)/install-asce-tools"
+[ -e "$CACHE" ] && rm -rf "$CACHE"
+mkdir -p "$CACHE"
+
+############################################################
+# Homebrew Utility Functions
+############################################################
+# From https://github.com/Homebrew/brew/blob/92d2cec5fa952c32b544faa04e671099d2dc3ff1/Library/Homebrew/brew.sh#L126
+
+ohai() {
+	# Check whether stdout is a tty.
+	if [[ -n "${HOMEBREW_COLOR}" || (-t 1 && -z "${HOMEBREW_NO_COLOR}") ]]; then
+		echo -e "\\033[34m==>\\033[0m \\033[1m$*\\033[0m" # blue arrow and bold text
+	else
+		echo "==> $*"
+	fi
+}
+
+opoo() {
+	# Check whether stderr is a tty.
+	if [[ -n "${HOMEBREW_COLOR}" || (-t 2 && -z "${HOMEBREW_NO_COLOR}") ]]; then
+		echo -ne "\\033[4;33mWarning\\033[0m: " >&2 # highlight Warning with underline and yellow color
+	else
+		echo -n "Warning: " >&2
+	fi
+	if [[ $# -eq 0 ]]; then
+		cat >&2
+	else
+		echo "$*" >&2
+	fi
+}
+
+bold() {
+	# Check whether stderr is a tty.
+	if [[ -n "${HOMEBREW_COLOR}" || (-t 2 && -z "${HOMEBREW_NO_COLOR}") ]]; then
+		echo -e "\\033[1m""$*""\\033[0m"
+	else
+		echo "$*"
+	fi
+}
+
+onoe() {
+	# Check whether stderr is a tty.
+	if [[ -n "${HOMEBREW_COLOR}" || (-t 2 && -z "${HOMEBREW_NO_COLOR}") ]]; then
+		echo -ne "\\033[4;31mError\\033[0m: " >&2 # highlight Error with underline and red color
+	else
+		echo -n "Error: " >&2
+	fi
+	if [[ $# -eq 0 ]]; then
+		cat >&2
+	else
+		echo "$*" >&2
+	fi
+}
+
+odie() {
+	onoe "$@"
+	exit 1
+}
+
+############################################################
+# Run "brew bundle install" on the Brewfile
+############################################################
+
+# Get path to the tap so we can run brew bundle with the absolute path to the Brewfile
+tap_path=$(brew --repo act3-ace/tap)
+
+# Create a Brewfile in the cache directory
+cat "$tap_path/asce-tools/Brewfile" >"$CACHE/Brewfile"
+
+# Add VS Code extensions to the Brewfile if requested
+[ "$VSCODE" == "true" ] && cat "$tap_path/asce-tools/Brewfile-vscode" >>"$CACHE/Brewfile"
+
+echo
+ohai "Installing tools using brew bundle"
+brew bundle install --file="$CACHE/Brewfile"
+
+# Manually output caveats for each formula
+# Some formulae come with additional setup steps
+while read -r line; do
+	# Skip non-formula lines
+	if [[ "${line}" != "brew "* ]]; then
+		continue
+	fi
+
+	# Get formula name
+	formula=${line#brew }   # Remove "brew "
+	formula=${formula//\"/} # Remove double quotes
+	formula=${formula//\'/} # Remove single quotes
+
+	# Get caveats
+	caveats=$(brew info --json "$formula" | "$HOMEBREW_PREFIX/bin/yq" '.[0] | .caveats')
+	if [[ "${caveats}" != "null" ]]; then
+		echo
+		ohai "${formula}: Caveats"
+		echo "$caveats"
+	fi
+done <"$CACHE/Brewfile"
+
+############################################################
+# Run "ace-kubectl-plugins" if it installed successfully
+############################################################
+
+# shellcheck disable=SC1091
+if [ -f "$HOMEBREW_PREFIX/bin/ace-kubectl-plugins" ]; then
+	echo
+	ohai "Installing Kubectl plugins"
+	if out=$("$HOMEBREW_PREFIX/bin/ace-kubectl-plugins" 2>&1); then
+		echo "Done"
+	else
+		opoo "Failed to install Kubectl plugins"
+		echo "$out" 1>&2
+	fi
+fi
