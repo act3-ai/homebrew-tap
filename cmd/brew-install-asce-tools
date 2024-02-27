@@ -3,12 +3,17 @@
 #:
 #:  Installs common tools for work in ASCE.
 #:
-#:      -v, --vscode                     Install VS Code extensions.
+#:          --vscode                     Install VS Code extensions. (default false)
 #:      -h, --help                       Show this message.
 
+# #:          --kubectl                    Install Kubectl plugins. (default true)
+# HELM_PLUGINS="true"
+# #:          --helm                       Install Helm plugins. (default true)
+# KUBECTL_PLUGINS="true"
+VSCODE_EXTS="false"
 for option in "$@"; do
 	case "${option}" in
-	-v | --vscode) VSCODE="true" ;;
+	-v | --vscode) VSCODE_EXTS="true" ;;
 	*)
 		brew help install-asce-tools
 		exit $?
@@ -80,56 +85,42 @@ odie() {
 }
 
 ############################################################
-# Run "brew bundle install" on the Brewfile
+# Run "brew bundle install" on the Brewfiles
 ############################################################
+# Use --verbose flag to include the caveats
 
-# Get path to the tap so we can run brew bundle with the absolute path to the Brewfile
-tap_path=$(brew --repo act3-ace/tap)
-
-# Create a Brewfile in the cache directory
-cat "$tap_path/asce-tools/Brewfile" >"$CACHE/Brewfile"
-
-# Add VS Code extensions to the Brewfile if requested
-[ "$VSCODE" == "true" ] && cat "$tap_path/asce-tools/Brewfile-vscode" >>"$CACHE/Brewfile"
+# Download Brewfile to the cache directory
+curl -o "$CACHE/Brewfile" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/Brewfile
 
 echo
-ohai "Installing tools using brew bundle"
-brew bundle install --file="$CACHE/Brewfile"
+ohai "Installing Homebrew Formulae with brew bundle"
 
-# Manually output caveats for each formula
-# Some formulae come with additional setup steps
-while read -r line; do
-	# Skip non-formula lines
-	if [[ "${line}" != "brew "* ]]; then
-		continue
-	fi
-
-	# Get formula name
-	formula=${line#brew }   # Remove "brew "
-	formula=${formula//\"/} # Remove double quotes
-	formula=${formula//\'/} # Remove single quotes
-
-	# Get caveats
-	caveats=$(brew info --json "$formula" | "$HOMEBREW_PREFIX/bin/yq" '.[0] | .caveats')
-	if [[ "${caveats}" != "null" ]]; then
-		echo
-		ohai "${formula}: Caveats"
-		echo "$caveats"
-	fi
-done <"$CACHE/Brewfile"
+brew bundle install --verbose --file="$CACHE/Brewfile"
 
 ############################################################
-# Run "ace-kubectl-plugins" if it installed successfully
+# Install VS Code extensions
 ############################################################
-
-# shellcheck disable=SC1091
-if [ -f "$HOMEBREW_PREFIX/bin/ace-kubectl-plugins" ]; then
+if [ "$VSCODE_EXTS" == "true" ]; then
+	curl -o "$CACHE/Brewfile-vscode" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/Brewfile-vscode
 	echo
-	ohai "Installing Kubectl plugins"
-	if out=$("$HOMEBREW_PREFIX/bin/ace-kubectl-plugins" 2>&1); then
-		echo "Done"
-	else
-		opoo "Failed to install Kubectl plugins"
-		echo "$out" 1>&2
-	fi
+	ohai "Installing VS Code extensions with brew bundle"
+	brew bundle install --verbose --file="$CACHE/Brewfile"
 fi
+
+############################################################
+# Install kubectl plugins
+############################################################
+# if [ "$KUBECTL_PLUGINS" == "true" ]; then
+curl -o "$CACHE/kubectl-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/kubectl-plugins
+chmod +x "$CACHE/kubectl-plugins"
+"$CACHE/kubectl-plugins"
+# fi
+
+############################################################
+# Install helm plugins
+############################################################
+# if [ "$HELM_PLUGINS" == "true" ]; then
+curl -o "$CACHE/helm-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/helm-plugins
+chmod +x "$CACHE/helm-plugins"
+"$CACHE/helm-plugins"
+# fi
