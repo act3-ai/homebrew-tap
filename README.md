@@ -45,7 +45,7 @@ The ACT3 Homebrew Tap defines some utility commands for ACT3 developers using [H
 
 #### Install ASCE Tools
 
-The `install-asce-tools` command installs [ASCE Tools](https://github.com/act3-ace/aceup/tree/move-asce-tools/asce-tools):
+The `install-asce-tools` command installs [ASCE Tools](https://github.com/act3-ace/aceup/tree/main/asce-tools):
 
 ```sh
 brew install-asce-tools
@@ -54,9 +54,9 @@ brew install-asce-tools
 brew install-asce-tools --vscode
 ```
 
-> ASCE Tools Documentation: [ACEup/asce-tools](https://github.com/act3-ace/aceup/tree/move-asce-tools/asce-tools)
+> ASCE Tools Documentation: [ACEup/asce-tools](https://github.com/act3-ace/aceup/tree/main/asce-tools)
 >
-> List of included software: [ASCE Tools Packages](https://github.com/act3-ace/aceup/tree/move-asce-tools/asce-tools#packages)
+> List of included software: [ASCE Tools Packages](https://github.com/act3-ace/aceup/tree/main/asce-tools#packages)
 
 #### Run ACT3 Login
 

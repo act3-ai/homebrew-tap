@@ -90,7 +90,7 @@ odie() {
 # Use --verbose flag to include the caveats
 
 # Download Brewfile to the cache directory
-curl -o "$CACHE/Brewfile" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/Brewfile
+curl -o "$CACHE/Brewfile" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/Brewfile
 
 echo
 ohai "Installing Homebrew Formulae with brew bundle"
@@ -101,7 +101,7 @@ brew bundle install --verbose --file="$CACHE/Brewfile"
 # Install VS Code extensions
 ############################################################
 if [ "$VSCODE_EXTS" == "true" ]; then
-	curl -o "$CACHE/Brewfile-vscode" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/Brewfile-vscode
+	curl -o "$CACHE/Brewfile-vscode" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/Brewfile-vscode
 	echo
 	ohai "Installing VS Code extensions with brew bundle"
 	brew bundle install --verbose --file="$CACHE/Brewfile"
@@ -111,7 +111,7 @@ fi
 # Install kubectl plugins
 ############################################################
 # if [ "$KUBECTL_PLUGINS" == "true" ]; then
-curl -o "$CACHE/kubectl-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/kubectl-plugins
+curl -o "$CACHE/kubectl-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/kubectl-plugins
 chmod +x "$CACHE/kubectl-plugins"
 "$CACHE/kubectl-plugins"
 # fi
@@ -120,7 +120,7 @@ chmod +x "$CACHE/kubectl-plugins"
 # Install helm plugins
 ############################################################
 # if [ "$HELM_PLUGINS" == "true" ]; then
-curl -o "$CACHE/helm-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/move-asce-tools/asce-tools/helm-plugins
+curl -o "$CACHE/helm-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/helm-plugins
 chmod +x "$CACHE/helm-plugins"
 "$CACHE/helm-plugins"
 # fi
