@@ -1,0 +1,7 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  name: update formula
+  runs-on: ubuntu
+  
