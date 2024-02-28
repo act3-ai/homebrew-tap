@@ -9,8 +9,6 @@ FORMULA=$1
 # Argument is block containing the updated URLs and checksums for the formula
 URL_BLOCK=$2
 
-# gsed -i -E "s/\n\s*on_macos do.*[\s\n]end[\s\n]*end\n[\s\n]*on_linux do.*[\s\n]end[\s\n]*end\n/${URL_BLOCK}/g" "$FORMULA"
-
 # Fail fast here
 if ! grep "require" "$FORMULA" | grep -q "registry_download"; then
 	echo "Formula $FORMULA does not import the download strategy file, leaving unchanged."

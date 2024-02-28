@@ -1,0 +1,29 @@
+name: Bump Formula version
+
+on:
+  workflow_dispatch:
+    inputs:
+      NAME:
+        description: Name of the Formula being bumped
+        required: true
+        type: string
+      VERSION:
+        description: Updated version for the Formula
+        required: true
+        type: string
+
+jobs:
+  bump-formula-version:
+    runs-on: ubuntu
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Formula version
+        run: ./bin/update-formula-version.sh "Formula/${{inputs.NAME}}.rb" "${{inputs.VERSION}}"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "fix(${{inputs.NAME}}): updated to ${{inputs.VERSION}}"
+          title: "fix(${{inputs.NAME}}): updated to ${{inputs.VERSION}}"
+          body: |
+            Version in Formula/${{inputs.NAME}}.rb updated by [.github/workflows/bump-formula-version.yml](.github/workflows/bump-formula-version.yml)
+          branch: bump-${{inputs.NAME}}-${{inputs.VERSION}}
