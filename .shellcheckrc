@@ -2,4 +2,4 @@
 external-sources=true
 
 # Suggest ${VAR} in place of $VAR
-# enable=require-variable-braces
+enable=require-variable-braces
