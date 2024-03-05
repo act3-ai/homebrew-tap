@@ -3,10 +3,40 @@
 #:
 #:  Installs common tools for work in ASCE.
 #:
-#:          --helm      Install Helm plugins. (default true)
-#:          --kubectl   Install Kubectl plugins. (default true)
-#:          --vscode    Install VS Code extensions. (default false)
-#:      -h, --help      Show this message.
+#:          --no-helm      Skip installing Helm plugins. (default false)
+#:          --no-kubectl   Skip installing Kubectl plugins. (default false)
+#:          --vscode       Install VS Code extensions. (default false)
+#:      -h, --help         Show this message.
+
+# Prints the help text manually
+function help() {
+	# Simple reimplementation of realpath using bash builtins
+	SOURCE=$(
+		cd "$(dirname "${BASH_SOURCE[0]}")" || exit
+		pwd -P
+	)/$(basename "${BASH_SOURCE[0]}")
+
+	# Check if script was run as a Homebrew external command
+	# Set command source to reflect the intended use of the script
+	if [[ "${SOURCE}" == "${HOMEBREW_PREFIX}"* ]]; then
+		SOURCE=$(basename "${SOURCE}")
+		# Make sure command has "brew-" prefix
+		if [[ "${SOURCE}" == "brew-"* ]]; then
+			SOURCE="brew ${SOURCE#brew-}"
+		fi
+	fi
+
+	cat <<EOF
+Usage: ${SOURCE} [options]
+
+Installs common tools for work in ASCE.
+
+        --no-helm      Skip installing Helm plugins. (default false)
+        --no-kubectl   Skip installing Kubectl plugins. (default false)
+        --vscode       Install VS Code extensions. (default false)
+    -h, --help         Show this message.
+EOF
+}
 
 HELM_PLUGINS="true"
 KUBECTL_PLUGINS="true"
@@ -16,9 +46,14 @@ for option in "$@"; do
 	--helm) HELM_PLUGINS="true" ;;
 	--kubectl) KUBECTL_PLUGINS="true" ;;
 	--vscode) VSCODE_EXTS="true" ;;
+	-h | --help)
+		help
+		exit 0
+		;;
 	*)
-		brew help install-asce-tools
-		exit $?
+		echo "Invalid option"
+		help
+		exit 1
 		;;
 	esac
 done
