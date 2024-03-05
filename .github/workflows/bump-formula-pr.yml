@@ -9,6 +9,7 @@ jobs:
   bump-formula-version:
     runs-on: ubuntu-latest
     steps:
-      - run: gh pr create -R ${{github.repositoryUrl}} -B main -H ${{github.ref_name}} --fill --reviewer ${{github.repository_owner}} -l bump-formula-pr
+      - uses: actions/checkout@v4
+      - run: gh pr create -B main -H ${{github.ref_name}} --fill --reviewer ${{github.repository_owner}} -l bump-formula-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
