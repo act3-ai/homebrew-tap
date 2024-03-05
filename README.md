@@ -23,10 +23,10 @@ ACT3 developers must complete the following authentication prerequisites to inst
 Add this tap by running:
 
 ```sh
-brew tap act3-ace/tap
+brew tap act3-ai/tap
 ```
 
-> Verify that the tap has been added by running the command `brew tap` and confirming that `act3-ace/tap` is in the list
+> Verify that the tap has been added by running the command `brew tap` and confirming that `act3-ai/tap` is in the list
 
 ### Installing Formulae
 
