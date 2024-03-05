@@ -1,0 +1,21 @@
+name: Bump Formula version
+
+on:
+  push:
+    branches:
+      - bump-*-*
+
+permissions:
+  pull-requests: write
+
+jobs:
+  bump-formula-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # must fetch main so GH CLI can create PR to it
+      # https://github.com/cli/cli/issues/5896#issuecomment-1780072370
+      - run: git fetch origin main
+      - run: gh pr create -B main -H ${{github.ref_name}} --fill --reviewer justenstall -l bump-formula-pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

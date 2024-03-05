@@ -62,7 +62,6 @@ class Act3PtBeta < Formula
   def caveats
     <<~EOS
       Add the following to VS Code's settings.json file to enable YAML file validation:
-
         "yaml.schemas": {
           "file://#{pkgetc}/project.act3-ace.io.schema.json": [
             ".project.yaml",
