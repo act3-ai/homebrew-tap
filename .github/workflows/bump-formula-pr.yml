@@ -13,9 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # must fetch main so GH CLI can create PR to it
+      # must fetch branches so GH CLI has the full picture
       # https://github.com/cli/cli/issues/5896#issuecomment-1780072370
       - run: git fetch origin main
+      - run: git fetch origin ${{github.ref_name}}
       - run: gh pr create -B main -H ${{github.ref_name}} --fill --reviewer justenstall -l bump-formula-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
