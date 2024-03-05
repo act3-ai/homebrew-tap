@@ -18,7 +18,7 @@ jobs:
       - name: Check for existing PR
         id: check
         run: |
-          prs=$(gh pr list |
+          prs=$(gh pr list \
             --repo ${{github.repositoryUrl}} \
             --head ${{github.ref_name}} \
             --base main \
