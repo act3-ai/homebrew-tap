@@ -16,6 +16,6 @@ jobs:
       # must fetch main so GH CLI can create PR to it
       # https://github.com/cli/cli/issues/5896#issuecomment-1780072370
       - run: git fetch origin main
-      - run: gh pr create -B main -H ${{github.ref_name}} --fill-first --reviewer justenstall -l bump-formula-pr
+      - run: gh pr create -B main -H ${{github.ref_name}} --fill --reviewer justenstall -l bump-formula-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
