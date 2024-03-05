@@ -7,15 +7,37 @@ permissions:
   pull-requests: write
 
 jobs:
-  bump-formula-pr:
+  check-pr-exists:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    outputs:
+      exists: ${{steps.check.outputs.exists}}
+    steps:
+      # Check if a PR exists for current branch
+      - name: Check for existing PR
+        id: check
+        run: |
+          prs=$(gh pr list |
+            --repo ${{github.repositoryUrl}} \
+            --head ${{github.ref_name}} \
+            --base main \
+            --json title \
+            --jq 'length')
+          if ((prs > 0)); then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          fi
+  create-pr:
+    runs-on: ubuntu-latest
+    # Only create the PR if one does not exist
+    needs: check-pr-exists
+    if: ${{ ! needs.check-pr-exists.outputs.exists }}
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     steps:
       - uses: actions/checkout@v4
       # must fetch branches so GH CLI has the full picture
       # https://github.com/cli/cli/issues/5896#issuecomment-1780072370
       - run: git fetch origin main
       - run: git fetch origin ${{github.ref_name}}
-      # - run: 
       - run: gh pr create -B main -H ${{github.ref_name}} --fill --reviewer justenstall -l bump-formula-pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
