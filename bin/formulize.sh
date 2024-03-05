@@ -11,16 +11,16 @@ REGISTRY=${INDEX_TAG%:*} # Remove everything after last colon (short suffix)
 TAG=${INDEX_TAG##*:}     # Remove everything before last colon (long prefix)
 
 # Download the image index once
-image_index=$(crane manifest "$REGISTRY:$TAG")
+image_index=$(crane manifest "${REGISTRY}:${TAG}")
 
 function blob_digest() {
   os=$1
   arch=$2
-  image_digest=$(echo "$image_index" | os=$os arch=$arch yq '.manifests[] | select(.platform.os == env(os) and .platform.architecture == env(arch)) | .digest')
-  [ "$image_digest" == "null" ] && return 1
-  blob_digest=$(crane manifest "$REGISTRY@$image_digest" | yq '.layers[0].digest')
-  [ "$blob_digest" == "null" ] && return 1
-  echo "$blob_digest"
+  image_digest=$(echo "${image_index}" | os=${os} arch=${arch} yq '.manifests[] | select(.platform.os == env(os) and .platform.architecture == env(arch)) | .digest')
+  [ "${image_digest}" == "null" ] && return 1
+  blob_digest=$(crane manifest "${REGISTRY}@${image_digest}" | yq '.layers[0].digest')
+  [ "${blob_digest}" == "null" ] && return 1
+  echo "${blob_digest}"
 }
 
 darwin_amd64=$(blob_digest darwin amd64)

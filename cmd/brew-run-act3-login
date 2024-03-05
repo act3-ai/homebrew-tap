@@ -2,16 +2,22 @@
 #:  * `run-act3-login` [<options>]
 #:
 #:  Runs ACT3 Login to authenticate to ACT3 services.
-#:  Acts as a shortcut to run the ACT3 Login command:
+#:
+#:  Acts as a shortcut to run the command:
 #:    bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"
 #:
 #:      -h, --help                       Show this message.
 
 for option in "$@"; do
 	case "${option}" in
-	*)
+	-h | --help)
 		brew help run-act3-login
-		exit $?
+		exit 0
+		;;
+	*)
+		echo "Invalid option"
+		brew help run-act3-login
+		exit 1
 		;;
 	esac
 done
