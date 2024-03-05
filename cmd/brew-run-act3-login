@@ -7,6 +7,25 @@
 #:
 #:      -h, --help                       Show this message.
 
+# function source () {
+# 	# file
+# }
+
+SOURCE=${BASH_SOURCE[0]}
+
+
+HELP=$(cat <<EOF
+#:  ${BASH_SOURCE[0]} [<options>]
+#:
+#:  Runs ACT3 Login to authenticate to ACT3 services.
+#:  Acts as a shortcut to run the ACT3 Login command:
+#:    bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"
+#:
+#:      -h, --help                       Show this message.
+EOF
+)
+
+
 for option in "$@"; do
 	case "${option}" in
 	*)
