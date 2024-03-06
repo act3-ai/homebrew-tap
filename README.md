@@ -8,7 +8,9 @@ The ACT3 Homebrew Tap repository contains Homebrew formulae for installing ACT3 
 - Registry authentication for `reg.git.act3-ace.com`, the ACT3 Container Registry
   - Satisfied by `docker login reg.git.act3-ace.com` or equivalent registry tool login (`oras`/`crane`/`podman`/etc)
 
-Running [ACT3 Login](https://github.com/act3-ace/aceup/blob/main/act3-login/README.md#run-act3-login) verifies these prerequisites and satisfies the authentication requirement.
+> [!TIP]
+>
+> Running [ACT3 Login](https://github.com/act3-ace/aceup/blob/main/act3-login/README.md#run-act3-login) verifies these prerequisites and satisfies the authentication requirement.
 
 ## Usage
 
@@ -30,7 +32,9 @@ Example:
 brew install ace-dt
 ```
 
-> As a shortcut, users can install ACT3 formulae without adding the tap by running:
+> [!TIP]
+>
+> Install formulae without adding the tap by adding the prefix `act3-ai/tap/`:
 >
 > ```sh
 > brew install act3-ai/tap/ace-dt
@@ -51,8 +55,6 @@ brew install-asce-tools
 brew install-asce-tools --vscode
 ```
 
-> ASCE Tools Documentation: [ACEup/asce-tools](https://github.com/act3-ace/aceup/tree/main/asce-tools)
->
 > List of included software: [ASCE Tools Packages](https://github.com/act3-ace/aceup/tree/main/asce-tools#packages)
 
 #### Run ACT3 Login
