@@ -1,22 +1,14 @@
 # ACT3 Homebrew Tap
 
-This repository contains the ACT3 Homebrew Tap and Formulae.
+The ACT3 Homebrew Tap repository contains Homebrew formulae for installing ACT3 software packages.
 
 ## Prerequisites
 
 - [Homebrew installed](https://brew.sh/)
-- [Git installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- Registry authentication for `reg.git.act3-ace.com`, the ACT3 Container Registry
+  - Satisfied by `docker login reg.git.act3-ace.com` or equivalent registry tool login (`oras`/`crane`/`podman`/etc)
 
-### Authentication
-
-ACT3 developers must complete the following authentication prerequisites to install formulae:
-
-- Git authentication for the ACT3 GitLab
-  - Needed for cloning/fetching packages for Git-based formulae
-  - Satisfied with Git SSH or HTTPS credentials
-- Registry authentication for the ACT3 GitLab Container Registry
-  - Needed for downloading packages for registry-based formulae
-  - Satisfied by `docker login reg.git.act3-ace.com` or equivalent registry login (`oras`/`crane`/`podman`/etc)
+Running [ACT3 Login](https://github.com/act3-ace/aceup/blob/main/act3-login/README.md#run-act3-login) verifies these prerequisites and satisfies the authentication requirement.
 
 ## Usage
 
@@ -35,9 +27,14 @@ Once the tap is added to Homebrew, you can install an ACT3 formula by running `b
 Example:
 
 ```sh
-# Install ACE Data Tool
 brew install ace-dt
 ```
+
+> As a shortcut, users can install ACT3 formulae without adding the tap by running:
+>
+> ```sh
+> brew install act3-ai/tap/ace-dt
+> ```
 
 ### Commands
 
@@ -69,6 +66,12 @@ brew run-act3-login
 ## How to Contribute
 
 **[Formula Author Guide](./docs/formula-author-guide.md)**: documentation for contributing formulae to the ACT3 Homebrew Tap
+
+## Support
+
+- **[Troubleshooting FAQ](docs/troubleshooting-faq.md)**: consult list of frequently asked questions and their answers
+- **[Create a Support Ticket issue](https://github.com/act3-ai/homebrew-tap/issues/new)**: create a support ticket on the ACT3 Homebrew Tap GitHub project
+- **[Mattermost channel](https://chat.git.act3-ace.com/act3/channels/devops)**: create a post in the DevOps channel for assistance
 
 ---
 

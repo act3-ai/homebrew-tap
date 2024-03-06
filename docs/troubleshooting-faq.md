@@ -2,7 +2,11 @@
 
 ## Troubleshooting
 
-If you are seeing the following error, the legacy version of the ACT3 Homebrew Tap must be removed from Homebrew.
+See **[Homebrew's Troubleshooting page](https://docs.brew.sh/Troubleshooting)** to troubleshoot common Homebrew issues.
+
+### Formula found in multiple taps
+
+If you are seeing the following error, the legacy ACT3 Homebrew Tap (<https://git.act3-ace.com/ace/homebrew-ace-tools>) must be removed from Homebrew.
 
 ```sh
 brew install act3-pt
@@ -20,3 +24,8 @@ Resolve the issue by running:
 ```sh
 brew untap act3/ace-tools
 ```
+
+## Support
+
+- **[Create a Support Ticket issue](https://github.com/act3-ai/homebrew-tap/issues/new)**: create a support ticket on the ACT3 Homebrew Tap GitHub project
+- **[Mattermost channel](https://chat.git.act3-ace.com/act3/channels/devops)**: create a post in the DevOps channel for assistance
