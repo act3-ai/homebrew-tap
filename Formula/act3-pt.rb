@@ -63,11 +63,17 @@ class Act3Pt < Formula
     <<~EOS
       Add the following to VS Code's settings.json file to enable YAML file validation:
         "yaml.schemas": {
+          "file://#{pkgetc}/project.act3-ace.io.schema.json": [
+            ".project.yaml",
+            ".act3-pt.yaml",
+            ".blueprint.yaml",
+            ".act3-template.yaml",
+            ".blueprintcatalog.yaml",
+            "catalog.yaml"
+          ],
           "file://#{pkgetc}/pt.act3-ace.io.schema.json": [
             "act3-pt-config.yaml",
-            "act3/pt/config.yaml",
-            ".act3-pt.yaml",
-            ".act3-template.yaml"
+            "act3/pt/config.yaml"
           ]
         }
 
