@@ -3,7 +3,7 @@
 require_relative "../lib/registry_download"
 
 class Act3PtBeta < Formula
-  desc "ACT3 Project Tool Beta - ACT3's project generator, updater, and automator"
+  desc "[BETA] ACT3 Project Tool - ACT3's project management toolbox"
   homepage "https://git.act3-ace.com/devsecops/act3-pt/-/tree/beta"
   version "2.0.0-beta.14"
 
