@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#:  * `install-asce-tools` [<options>]
+#:  * `asce-tools` [<options>]
 #:
 #:  Installs common tools for work in ASCE.
 #:
@@ -61,7 +61,7 @@ done
 set -e
 
 # Initialize cache directory
-CACHE="$(brew --cache)/install-asce-tools"
+CACHE="$(brew --cache)/asce-tools"
 [ -e "${CACHE}" ] && rm -rf "${CACHE}"
 mkdir -p "${CACHE}"
 
@@ -140,7 +140,7 @@ if [ "${VSCODE_EXTS}" == "true" ]; then
 	curl -o "${CACHE}/Brewfile-vscode" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/Brewfile-vscode
 	echo
 	ohai "Installing VS Code extensions with brew bundle"
-	brew bundle install --verbose --file="${CACHE}/Brewfile"
+	brew bundle install --verbose --file="${CACHE}/Brewfile-vscode"
 fi
 
 ############################################################

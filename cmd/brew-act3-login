@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#:  * `run-act3-login` [<options>]
+#:  * `act3-login` [<options>]
 #:
 #:  Runs ACT3 Login to authenticate to ACT3 services.
 #:
@@ -11,12 +11,12 @@
 for option in "$@"; do
 	case "${option}" in
 	-h | --help)
-		brew help run-act3-login
+		brew help act3-login
 		exit 0
 		;;
 	*)
 		echo "Invalid option"
-		brew help run-act3-login
+		brew help act3-login
 		exit 1
 		;;
 	esac

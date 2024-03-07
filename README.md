@@ -46,23 +46,23 @@ The ACT3 Homebrew Tap defines some utility commands for ACT3 developers using [H
 
 #### Install ASCE Tools
 
-The `install-asce-tools` command installs [ASCE Tools](https://github.com/act3-ace/aceup/tree/main/asce-tools):
+The `asce-tools` command installs [ASCE Tools](https://github.com/act3-ace/aceup/tree/main/asce-tools):
 
 ```sh
-brew install-asce-tools
+brew asce-tools
 
 # Add the --vscode option to install common VS Code extensions
-brew install-asce-tools --vscode
+brew asce-tools --vscode
 ```
 
 > List of included software: [ASCE Tools Packages](https://github.com/act3-ace/aceup/tree/main/asce-tools#packages)
 
 #### Run ACT3 Login
 
-The `run-act3-login` command is a shortcut for running [ACT3 Login](https://github.com/act3-ace/aceup/tree/main/act3-login/):
+The `act3-login` command is a shortcut for running [ACT3 Login](https://github.com/act3-ace/aceup/tree/main/act3-login/):
 
 ```sh
-brew run-act3-login
+brew act3-login
 ```
 
 ## How to Contribute
