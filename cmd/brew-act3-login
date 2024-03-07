@@ -26,4 +26,9 @@ done
 # Run the dang script
 ############################################################
 
+# DBUS_SESSION_BUS_ADDRESS is set to preserve the dbus session 
+# for use by secret service password managers.
+# This is needed for linux users using secretservice for docker config
+export DBUS_SESSION_BUS_ADDRESS="${HOMEBREW_DBUS_SESSION_BUS_ADDRESS}"
+
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"
