@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #:  * `asce-tools` [<options>]
 #:
-#:  Installs common tools for work in ASCE.
+#:  Installs ASCE Tools, common tools for work in ASCE.
+#:  ASCE Tools documentation: https://gitlab.com/act3-ai/asce/up/-/tree/main/asce-tools
 #:
 #:          --no-helm      Skip installing Helm plugins. (default false)
 #:          --no-kubectl   Skip installing Kubectl plugins. (default false)
@@ -121,13 +122,18 @@ odie() {
 	exit 1
 }
 
+# DBUS_SESSION_BUS_ADDRESS is set to preserve the dbus session 
+# for use by secret service password managers.
+# This is needed for linux users using secretservice for docker config
+export DBUS_SESSION_BUS_ADDRESS="${HOMEBREW_DBUS_SESSION_BUS_ADDRESS}"
+
 ############################################################
 # Run "brew bundle install" on the Brewfiles
 ############################################################
 # Use --verbose flag to include the caveats
 
 # Download Brewfile to the cache directory
-curl -o "${CACHE}/Brewfile" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/Brewfile
+curl -o "${CACHE}/Brewfile" -fsSL https://gitlab.com/act3-ai/asce/up/-/raw/main/asce-tools/Brewfile
 
 ohai "Installing Homebrew Formulae with brew bundle"
 
@@ -137,7 +143,7 @@ brew bundle install --verbose --file="${CACHE}/Brewfile"
 # Install VS Code extensions
 ############################################################
 if [ "${VSCODE_EXTS}" == "true" ]; then
-	curl -o "${CACHE}/Brewfile-vscode" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/Brewfile-vscode
+	curl -o "${CACHE}/Brewfile-vscode" -fsSL https://gitlab.com/act3-ai/asce/up/-/raw/main/asce-tools/Brewfile-vscode
 	echo
 	ohai "Installing VS Code extensions with brew bundle"
 	brew bundle install --verbose --file="${CACHE}/Brewfile-vscode"
@@ -147,7 +153,7 @@ fi
 # Install kubectl plugins
 ############################################################
 if [ "${KUBECTL_PLUGINS}" == "true" ]; then
-	curl -o "${CACHE}/kubectl-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/kubectl-plugins
+	curl -o "${CACHE}/kubectl-plugins" -fsSL https://gitlab.com/act3-ai/asce/up/-/raw/main/asce-tools/kubectl-plugins
 	chmod +x "${CACHE}/kubectl-plugins"
 	"${CACHE}/kubectl-plugins"
 fi
@@ -156,7 +162,7 @@ fi
 # Install helm plugins
 ############################################################
 if [ "${HELM_PLUGINS}" == "true" ]; then
-	curl -o "${CACHE}/helm-plugins" -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/asce-tools/helm-plugins
+	curl -o "${CACHE}/helm-plugins" -fsSL https://gitlab.com/act3-ai/asce/up/-/raw/main/asce-tools/helm-plugins
 	chmod +x "${CACHE}/helm-plugins"
 	"${CACHE}/helm-plugins"
 fi

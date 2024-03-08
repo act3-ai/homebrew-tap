@@ -2,9 +2,10 @@
 #:  * `act3-login` [<options>]
 #:
 #:  Runs ACT3 Login to authenticate to ACT3 services.
+#:  ACT3 Login documentation: https://gitlab.com/act3-ai/asce/up/-/tree/main/asce-tools
 #:
 #:  Acts as a shortcut to run the command:
-#:    bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"
+#:    bash -c "$(curl -fsSL https://gitlab.com/act3-ai/asce/up/-/raw/main/act3-login/act3-login)"
 #:
 #:      -h, --help                       Show this message.
 
@@ -22,13 +23,13 @@ for option in "$@"; do
 	esac
 done
 
-############################################################
-# Run the dang script
-############################################################
-
 # DBUS_SESSION_BUS_ADDRESS is set to preserve the dbus session 
 # for use by secret service password managers.
 # This is needed for linux users using secretservice for docker config
 export DBUS_SESSION_BUS_ADDRESS="${HOMEBREW_DBUS_SESSION_BUS_ADDRESS}"
 
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/act3-ace/aceup/main/act3-login/act3-login)"
+############################################################
+# Run the dang script
+############################################################
+
+bash -c "$(curl -fsSL https://gitlab.com/act3-ai/asce/up/-/raw/main/act3-login/act3-login)"
