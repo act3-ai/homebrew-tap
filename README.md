@@ -10,7 +10,7 @@ The ACT3 Homebrew Tap repository contains Homebrew formulae for installing ACT3 
 
 > [!TIP]
 >
-> Running [ACT3 Login](https://github.com/act3-ace/aceup/blob/main/act3-login/README.md#run-act3-login) verifies these prerequisites and satisfies the authentication requirement.
+> Running [ACT3 Login](https://gitlab.com/act3-ai/asce/up/-/blob/main/act3-login/README.md#run-act3-login) verifies these prerequisites and satisfies the authentication requirement.
 
 ## Usage
 
@@ -46,7 +46,7 @@ The ACT3 Homebrew Tap defines some utility commands for ACT3 developers using [H
 
 #### Install ASCE Tools
 
-The `asce-tools` command installs [ASCE Tools](https://github.com/act3-ace/aceup/tree/main/asce-tools):
+The `asce-tools` command installs [ASCE Tools](https://gitlab.com/act3-ai/asce/up/-/tree/main/asce-tools):
 
 ```sh
 brew asce-tools
@@ -55,11 +55,11 @@ brew asce-tools
 brew asce-tools --vscode
 ```
 
-> List of included software: [ASCE Tools Packages](https://github.com/act3-ace/aceup/tree/main/asce-tools#packages)
+> List of included software: [ASCE Tools Packages](https://gitlab.com/act3-ai/asce/up/-/tree/main/asce-tools#packages)
 
 #### Run ACT3 Login
 
-The `act3-login` command is a shortcut for running [ACT3 Login](https://github.com/act3-ace/aceup/tree/main/act3-login/):
+The `act3-login` command is a shortcut for running [ACT3 Login](https://gitlab.com/act3-ai/asce/up/-/tree/main/act3-login/):
 
 ```sh
 brew act3-login
