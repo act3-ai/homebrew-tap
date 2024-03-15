@@ -38,8 +38,6 @@ class Act3Pt < Formula
     end
   end
 
-  conflicts_with "act3-pt-beta", because: "act3-pt and act3-pt-beta install conflicting executables"
-
   def install
     bin.install "act3-pt"
     generate_completions_from_executable(bin/"act3-pt", "completion")
