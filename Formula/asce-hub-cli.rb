@@ -38,18 +38,18 @@ class AsceHubCli < Formula
   def install
     bin.install "hub"
 
-    # with_homebrew_path do
-    #   # Completions from downstream tools are sourced by asce,
-    #   # so they must be discoverable on the PATH
-    #   generate_completions_from_executable(bin/"hub", "completion")
-    # end
+    with_homebrew_path do
+      # Completions from downstream tools are sourced by asce,
+      # so they must be discoverable on the PATH
+      generate_completions_from_executable(bin/"hub", "completion")
+    end
 
-    # # Generate manpages
-    # mkdir "man" do
-    #   system bin/"hub", "gendocs", "man", "."
-    #   man1.install Dir["*.1"]
-    #   # man5.install Dir["*.5"]
-    # end
+    # Generate manpages
+    mkdir "man" do
+      system bin/"hub", "gendocs", "man", "."
+      man1.install Dir["*.1"]
+      # man5.install Dir["*.5"]
+    end
   end
 
   # test do
