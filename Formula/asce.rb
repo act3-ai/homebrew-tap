@@ -37,21 +37,59 @@ class Asce < Formula
 
   def install
     bin.install "asce"
-    # generate_completions_from_executable(bin/"asce", "completion")
+    generate_completions_from_executable(bin/"asce", "completion")
 
-    # # Generate manpages
-    # mkdir "man" do
-    #   system bin/"asce", "gendocs", "man", "."
-    #   man1.install Dir["*.1"]
-    #   man5.install Dir["*.5"]
-    # end
+    # Generate manpages
+    mkdir "man" do
+      system bin/"asce", "gendocs", "man", "."
+      man1.install Dir["*.1"]
+      man5.install Dir["*.5"]
+    end
 
-    # # Generate JSON Schema definitions
-    # # Use pkgetc here so path doesn't change over version numbers
-    # # Cannot use symlink for this because VS Code cannot follow symlinks for schema files
-    # mkdir pkgetc do
-    #   system bin/"asce", "genschema", "."
-    # end
+    # Generate JSON Schema definitions
+    # Use pkgetc here so path doesn't change over version numbers
+    # Cannot use symlink for this because VS Code cannot follow symlinks for schema files
+    mkdir pkgetc do
+      system bin/"asce", "genschema", "."
+    end
+  end
+
+  def caveats
+    <<~EOS
+      Add the following to VS Code's settings.json file to enable YAML file validation:
+        "yaml.schemas": {
+          "file://#{pkgetc}/config.dt.act3-ace.io.schema.json": [
+            "ace-dt-config.yaml",
+            "ace/dt/config.yaml"
+          ],
+          "file://#{pkgetc}/data.act3-ace.io.schema.json": "entry.yaml",
+          "file://#{pkgetc}/project.act3-ace.io.schema.json": [
+            ".project.yaml",
+            ".act3-pt.yaml",
+            ".blueprint.yaml",
+            ".act3-template.yaml",
+            ".blueprintcatalog.yaml",
+            "catalog.yaml"
+          ],
+          "file://#{pkgetc}/pt.act3-ace.io.schema.json": [
+            "act3-pt-config.yaml",
+            "act3/pt/config.yaml"
+          ]
+        }
+
+      Add the following to VS Code's settings.json file to enable JSON file validation:
+        "json.schemas": [
+          {
+            "fileMatch": [
+              "entry.json"
+            ],
+            "url": "file://#{pkgetc}/data.act3-ace.io.schema.json"
+          }
+        ]
+
+      Check out the quick start guide to get started with asce:
+        ace-dt info quick-start-guide
+    EOS
   end
 
   test do
