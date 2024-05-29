@@ -5,13 +5,13 @@
 class Hops < Formula
   desc "Homebrew Bottle installer with a focus on performance and mobility."
   homepage "https://github.com/act3-ai/hops"
-  version "0.1.3"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
     on_intel do
-      url "https://github.com/act3-ai/hops/releases/download/v0.1.3/hops_darwin_amd64.tar.gz"
-      sha256 "fc98c0dc039c7c3e0f7035c466dedbc10ba1aaa3ba41c2ab12f64be6bfa78708"
+      url "https://github.com/act3-ai/hops/releases/download/v0.2.0/hops_darwin_amd64.tar.gz"
+      sha256 "21f5d2cc94f6341e5b74d8566547773cf621d5ac88b1a4f2763a435780b10402"
 
       def install
         bin.install "bin/hops"
@@ -26,8 +26,8 @@ class Hops < Formula
       end
     end
     on_arm do
-      url "https://github.com/act3-ai/hops/releases/download/v0.1.3/hops_darwin_arm64.tar.gz"
-      sha256 "286764d1e96e9a10a347500834d7d78bbd9355af74b60eb26c88742e1a0f1aa9"
+      url "https://github.com/act3-ai/hops/releases/download/v0.2.0/hops_darwin_arm64.tar.gz"
+      sha256 "37a9a6a30d832c296dd05c276f7d991659c4e38b31d927e846507284c67fc4c3"
 
       def install
         bin.install "bin/hops"
@@ -46,8 +46,8 @@ class Hops < Formula
   on_linux do
     on_intel do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/act3-ai/hops/releases/download/v0.1.3/hops_linux_amd64.tar.gz"
-        sha256 "93cb941da79187a7240a98bcd0aa5081f68b67992502defac8afd288a84731fd"
+        url "https://github.com/act3-ai/hops/releases/download/v0.2.0/hops_linux_amd64.tar.gz"
+        sha256 "8e558e7f39d4951a290e176a4e32fea9b64565d27cc7889fa809371352a9684b"
 
         def install
           bin.install "bin/hops"
@@ -64,8 +64,8 @@ class Hops < Formula
     end
     on_arm do
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/act3-ai/hops/releases/download/v0.1.3/hops_linux_arm64.tar.gz"
-        sha256 "a4d2938e6371a1403ff7eeb6b8672adb9ea0879abfde919ad035a15f0c97fb11"
+        url "https://github.com/act3-ai/hops/releases/download/v0.2.0/hops_linux_arm64.tar.gz"
+        sha256 "b6805e6e20647bb71f534e92d1550234e335e02a7083dea3512c183639aa09fe"
 
         def install
           bin.install "bin/hops"
