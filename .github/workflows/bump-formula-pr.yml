@@ -1,3 +1,5 @@
+name: Formula Bump PR
+
 on:
   push:
     branches:
