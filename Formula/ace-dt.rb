@@ -75,6 +75,6 @@ class Hops < Formula
   end
 
   test do
-    system "#{bin}/ace-dt --version"
+    system "#{bin}/ace-dt", "version"
   end
 end
