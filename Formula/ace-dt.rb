@@ -5,13 +5,13 @@
 class AceDt < Formula
   desc "A CLI tool for packaging, uploading, and downloading data from OCI registries."
   homepage "https://github.com/act3-ai/data-tool"
-  version "1.15.32"
+  version "1.15.33"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/act3-ai/data-tool/releases/download/v1.15.32/ace-dt-v1.15.32-darwin-amd64.tar.gz"
-      sha256 "ad1ed32917cbd4c8daba3771c3baa5a3cf5fd976da943454efb5749be8e65dca"
+      url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-darwin-amd64.tar.gz"
+      sha256 "c10e75838df5e64fd5e3e75dfe5738d336ae1decc59dfc00a726ddce05ed0cb5"
 
       def install
         bin.install "ace-dt"
@@ -25,8 +25,8 @@ class AceDt < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/act3-ai/data-tool/releases/download/v1.15.32/ace-dt-v1.15.32-darwin-arm64.tar.gz"
-      sha256 "04b209af9657c1f6786f9e8c67f805ce374ca0b0d841c2e4d5dc9f794318349b"
+      url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-darwin-arm64.tar.gz"
+      sha256 "7b2ac8a17a401621021e51d0c7e8805193f07d37741cdedd895c7173f3685bd3"
 
       def install
         bin.install "ace-dt"
@@ -44,8 +44,8 @@ class AceDt < Formula
   on_linux do
     if Hardware::CPU.intel?
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/act3-ai/data-tool/releases/download/v1.15.32/ace-dt-v1.15.32-linux-amd64.tar.gz"
-        sha256 "fb338c0ee660a9f4c11babaa5900b8bd0a904162ed523f327f849af739745fb2"
+        url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-linux-amd64.tar.gz"
+        sha256 "e3d423f83604f1c3ab35cba61e170989d9d7f264d1989f2310c507d30bd4f704"
 
         def install
           bin.install "ace-dt"
@@ -61,8 +61,8 @@ class AceDt < Formula
     end
     if Hardware::CPU.arm?
       if Hardware::CPU.is_64_bit?
-        url "https://github.com/act3-ai/data-tool/releases/download/v1.15.32/ace-dt-v1.15.32-linux-arm64.tar.gz"
-        sha256 "1f4a1251eaaa9f07aade129f7de7b2f442d15b019b3d21c627c3363282121ca0"
+        url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-linux-arm64.tar.gz"
+        sha256 "db8dbcc2c3bfa1025ce0c5d0da3314285c276242a384f22215df39d646ceea06"
 
         def install
           bin.install "ace-dt"
