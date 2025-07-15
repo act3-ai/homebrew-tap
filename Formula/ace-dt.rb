@@ -7,7 +7,6 @@ class AceDt < Formula
   homepage "https://github.com/act3-ai/data-tool"
   version "1.15.33"
   license "MIT"
-  disable! date: "2025-07-15", because: "the cask should be used now instead", replacement_cask: "ace-dt"
 
   on_macos do
     if Hardware::CPU.intel?
