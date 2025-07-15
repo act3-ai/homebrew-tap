@@ -42,7 +42,8 @@ cask "ace-dt" do
 
   postflight do
     if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/ace-dt"]
+      # replace 'foo' with the actual binary name
+      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/foo"]
     end
     generate_completions_from_executable(bin/"ace-dt", "completion")
     mkdir "man" do
