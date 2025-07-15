@@ -5,13 +5,13 @@
 class AceDt < Formula
   desc "A CLI tool for packaging, uploading, and downloading data from OCI registries."
   homepage "https://github.com/act3-ai/data-tool"
-  version "1.15.33"
+  version "1.16.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-darwin-amd64.tar.gz"
-      sha256 "c10e75838df5e64fd5e3e75dfe5738d336ae1decc59dfc00a726ddce05ed0cb5"
+      url "https://github.com/act3-ai/data-tool/releases/download/v1.16.1/ace-dt-v1.16.1-darwin-amd64.tar.gz"
+      sha256 "86b34fd38ad901846e222410a5550456073d492fe22f08a8cd852c309f81fade"
 
       def install
         bin.install "ace-dt"
@@ -25,8 +25,8 @@ class AceDt < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-darwin-arm64.tar.gz"
-      sha256 "7b2ac8a17a401621021e51d0c7e8805193f07d37741cdedd895c7173f3685bd3"
+      url "https://github.com/act3-ai/data-tool/releases/download/v1.16.1/ace-dt-v1.16.1-darwin-arm64.tar.gz"
+      sha256 "250855f63142684b2404e4de2c6604c8561c1d5562105f2520b8e6e70a018f07"
 
       def install
         bin.install "ace-dt"
@@ -42,37 +42,31 @@ class AceDt < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      if Hardware::CPU.is_64_bit?
-        url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-linux-amd64.tar.gz"
-        sha256 "e3d423f83604f1c3ab35cba61e170989d9d7f264d1989f2310c507d30bd4f704"
+    if Hardware::CPU.intel? and Hardware::CPU.is_64_bit?
+      url "https://github.com/act3-ai/data-tool/releases/download/v1.16.1/ace-dt-v1.16.1-linux-amd64.tar.gz"
+      sha256 "f08c230a969ecb40d9515fdaeec1356fb678e7928cc69cbcd7440673e31267e7"
+      def install
+        bin.install "ace-dt"
+        generate_completions_from_executable(bin/"ace-dt", "completion")
 
-        def install
-          bin.install "ace-dt"
-          generate_completions_from_executable(bin/"ace-dt", "completion")
-
-          # Generate manpages
-          mkdir "man" do
-            system bin/"ace-dt", "gendocs", "man", "."
-            man1.install Dir["*.1"]
-          end
+        # Generate manpages
+        mkdir "man" do
+          system bin/"ace-dt", "gendocs", "man", "."
+          man1.install Dir["*.1"]
         end
       end
     end
-    if Hardware::CPU.arm?
-      if Hardware::CPU.is_64_bit?
-        url "https://github.com/act3-ai/data-tool/releases/download/v1.15.33/ace-dt-v1.15.33-linux-arm64.tar.gz"
-        sha256 "db8dbcc2c3bfa1025ce0c5d0da3314285c276242a384f22215df39d646ceea06"
+    if Hardware::CPU.arm? and Hardware::CPU.is_64_bit?
+      url "https://github.com/act3-ai/data-tool/releases/download/v1.16.1/ace-dt-v1.16.1-linux-arm64.tar.gz"
+      sha256 "10e9824c47799bd0360e393a6487d8ebd91c0b02068affb324a17d62e0f5fd1c"
+      def install
+        bin.install "ace-dt"
+        generate_completions_from_executable(bin/"ace-dt", "completion")
 
-        def install
-          bin.install "ace-dt"
-          generate_completions_from_executable(bin/"ace-dt", "completion")
-
-          # Generate manpages
-          mkdir "man" do
-            system bin/"ace-dt", "gendocs", "man", "."
-            man1.install Dir["*.1"]
-          end
+        # Generate manpages
+        mkdir "man" do
+          system bin/"ace-dt", "gendocs", "man", "."
+          man1.install Dir["*.1"]
         end
       end
     end
