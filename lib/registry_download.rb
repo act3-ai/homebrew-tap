@@ -16,8 +16,7 @@ class BlobDownloadStrategy < AbstractFileDownloadStrategy
     with_homebrew_path do
       # blobs are downloaded with oras because it uses registry authentication
       # enables downloads from private registry with credentials from ~/.docker/config.json
-      ensure_formula_installed! "oras",
-                                reason: "fetching from an authenticated OCI registry"
+      Formula["oras"].ensure_installed!(reason: "fetching from an authenticated OCI registry")
     end
   end
 
