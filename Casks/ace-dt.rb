@@ -32,7 +32,7 @@ cask "ace-dt" do
   end
 
   binary "ace-dt"
-  generate_completions_from_executable "ace-dt", "completions"
+  generate_completions_from_executable "ace-dt", "completion"
 
   # No zap stanza required
 end
