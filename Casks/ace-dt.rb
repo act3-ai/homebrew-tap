@@ -39,7 +39,7 @@ cask "ace-dt" do
     run "ace-dt", args: ["gendocs", "man", "."]
     run 'man1.install Dir["*.1"]'
   end
-  generate_completions_from_executable "bin/ace-dt", "completions"
+  generate_completions_from_executable "ace-dt", "completions"
 
   # No zap stanza required
 end
