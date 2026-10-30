@@ -36,7 +36,7 @@ cask "ace-dt" do
   postflight_steps do
     # Generate manpages
     run "mkdir", args: ["man"]
-    run "bin/ace-dt", args: ["gendocs", "man", "."]
+    run "ace-dt", args: ["gendocs", "man", "."]
     run 'man1.install Dir["*.1"]'
   end
   generate_completions_from_executable "bin/ace-dt", "completions"
